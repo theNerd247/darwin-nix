@@ -90,8 +90,7 @@
       noahHomeConfiguration = 
         { config, pkgs, ... }:
         
-        {
-          # Home Manager needs a bit of information about you and the
+        { # Home Manager needs a bit of information about you and the
           # paths it should manage.
           home.username = noah.name;
           home.homeDirectory = noah.home;
@@ -123,6 +122,7 @@
                 lgga = "log --graph --decorate --oneline --all";
                 st   = "status";
               };
+            extraConfig = { core = { editor = "vim"; }; };
           }; 
 
           programs.vim =
@@ -171,8 +171,8 @@
       { darwinConfigurations =
         { "Noahs-MBP" = darwin.lib.darwinSystem 
           { system = "aarch64-darwin";
-            modules = [ 
-              darwinConfiguration
+            modules =
+            [ darwinConfiguration
               home-manager.darwinModules.home-manager
               { nixpkgs = nixpkgsConfig;
                 # `home-manager` config
