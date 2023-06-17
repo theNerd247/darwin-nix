@@ -17,16 +17,23 @@
       # Configuration for `nixpkgs`
       nixpkgsConfig = {
         config = { allowUnfree = true; };
-        # overlays = attrValues self.overlays ++ singleton (
-        #   # Sub in x86 version of packages that don't build on Apple Silicon yet
-        #   final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-        #     inherit (final.pkgs-x86)
-        #       idris2
-        #       nix-index
-        #       niv
-        #       purescript;
-        #   })
-        # );
+
+        # TODO: enable the upstream git-bug so that we have access to fixed bugs
+        overlays = 
+        [ (final: prev:
+            { git-bug = prev.git-bug.overrideAttrs (_: __:
+              { src = final.fetchFromGitHub 
+                { owner = "MichaelMure"; 
+                  repo = "git-bug"; 
+                  rev = "master";
+                  sha256 = "1oaRue+hGRE59E5nLVjb/5qbRkdnGJxrzr5xcsecP1o=";
+                }; 
+                version = "master";
+                vendorHash = final.lib.fakeSha256;
+              });
+            }
+          )
+        ];
       }; 
 
       # users information described in nix-darwin and home-manager
@@ -46,10 +53,13 @@
         {
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep <program-name-query>
-          environment.systemPackages =
+          environment = 
+          { systemPackages =
             [ pkgs.vim
               pkgs.git
             ];
+            variables = { EDITOR = "vim"; };
+          };
         
           # Use a custom configuration.nix location.
           # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
