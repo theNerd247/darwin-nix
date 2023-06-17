@@ -132,6 +132,7 @@
 
           programs.vim =
           { enable = true;
+            defaultEditor = true;
             extraConfig =
             ''
             " I like syntax highlighting
