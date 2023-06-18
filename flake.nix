@@ -18,21 +18,31 @@
       nixpkgsConfig = {
         config = { allowUnfree = true; };
 
+
         # TODO: enable the upstream git-bug so that we have access to fixed bugs
         overlays = 
-        [ (final: prev:
-            { git-bug = prev.git-bug.overrideAttrs (_: __:
+        let
+          overrideGoModule = final: goModuleDrv: overrideArgs: goModuleDrv.override
+            { buildGoModule = args: final.buildGoModule (args // overrideArgs);
+            };
+        in
+        [ (final: prev: 
+          { git-bug = overrideGoModule final prev.git-bug rec
               { src = final.fetchFromGitHub 
                 { owner = "MichaelMure"; 
                   repo = "git-bug"; 
-                  rev = "master";
+                  rev = "${version}";
                   sha256 = "1oaRue+hGRE59E5nLVjb/5qbRkdnGJxrzr5xcsecP1o=";
-                }; 
+                };
+                ldflags = 
+                [ "-X github.com/MichaelMure/git-bug/commands.GitCommit=${version}"
+                  "-X github.com/MichaelMure/git-bug/commands.GitLastTag=${version}"
+                  "-X github.com/MichaelMure/git-bug/commands.GitExactTag=${version}"
+                ];
                 version = "master";
-                vendorHash = final.lib.fakeSha256;
-              });
-            }
-          )
+                vendorSha256 = "sha256-++vx4J/D4XxIhagaPewpW1zwIUFy85cX+W2lUTy1KbU=";
+              };
+          })
         ];
       }; 
 
