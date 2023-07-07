@@ -18,7 +18,6 @@
       nixpkgsConfig = {
         config = { allowUnfree = true; };
 
-
         # TODO: enable the upstream git-bug so that we have access to fixed bugs
         overlays = 
         let
@@ -134,6 +133,7 @@
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = false;
 
+
           programs.git =
           { enable    = true;
             userEmail = "noah.harvey247@gmail.com";
@@ -147,12 +147,17 @@
                 lgga = "log --graph --decorate --oneline --all";
                 st   = "status";
               };
-            extraConfig = { core = { editor = "vim"; }; };
+            extraConfig = { core = { editor = "hx"; }; };
           }; 
+
+          programs.helix =
+            { enable = true;
+              defaultEditor = true;
+            };
 
           programs.vim =
           { enable = true;
-            defaultEditor = true;
+            defaultEditor = false;
             extraConfig =
             ''
             " I like syntax highlighting
@@ -191,7 +196,6 @@
             plugins = [];
           };
         };
-  
     in
   
       { darwinConfigurations =
