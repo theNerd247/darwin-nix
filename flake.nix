@@ -66,8 +66,7 @@
           { systemPackages =
             [ pkgs.vim
               pkgs.git
-              pkgs.aspell
-              pkgs.aspellDicts.en
+              pkgs.aspellWithDicts (d: [d.en])
             ];
             variables = { EDITOR = "vim"; };
           };
