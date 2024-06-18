@@ -7,7 +7,7 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "/Users/noah/src/home-manager";
+    home-manager.url = "git+file:/Users/noah/src/home-manager?ref=himalaya-fix&rev=1ca694f2fcaf216309f0da1ec4efb2fbe3b68786";
 #    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -44,7 +44,7 @@
               (pkgs.aspellWithDicts (d: [d.en]))
               pkgs.jq
             ];
-            variables = { EDITOR = "vim"; };
+            variables = { EDITOR = "hx"; };
           };
         
           # Use a custom configuration.nix location.
@@ -126,7 +126,7 @@
 
           programs.himalaya = 
           { enable = true; 
-            settings = { downloads-dir = "~/Downloads"; }; 
+            settings = {};# { downloads-dir = "~/Downloads"; }; 
           };
 
           programs.git =
