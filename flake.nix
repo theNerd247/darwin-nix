@@ -2,12 +2,13 @@
   description = "Nix-Darwin configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "/Users/noah/src/home-manager";
+#    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -17,32 +18,6 @@
       # Configuration for `nixpkgs`
       nixpkgsConfig = {
         config = { allowUnfree = true; };
-
-        # TODO: enable the upstream git-bug so that we have access to fixed bugs
-        overlays = 
-        let
-          overrideGoModule = final: goModuleDrv: overrideArgs: goModuleDrv.override
-            { buildGoModule = args: final.buildGoModule (args // overrideArgs);
-            };
-        in
-        [ (final: prev: 
-          { git-bug = overrideGoModule final prev.git-bug rec
-              { src = final.fetchFromGitHub 
-                { owner = "MichaelMure"; 
-                  repo = "git-bug"; 
-                  rev = "${version}";
-                  sha256 = "1oaRue+hGRE59E5nLVjb/5qbRkdnGJxrzr5xcsecP1o=";
-                };
-                ldflags = 
-                [ "-X github.com/MichaelMure/git-bug/commands.GitCommit=${version}"
-                  "-X github.com/MichaelMure/git-bug/commands.GitLastTag=${version}"
-                  "-X github.com/MichaelMure/git-bug/commands.GitExactTag=${version}"
-                ];
-                version = "master";
-                vendorSha256 = "sha256-++vx4J/D4XxIhagaPewpW1zwIUFy85cX+W2lUTy1KbU=";
-              };
-          })
-        ];
       }; 
 
       # users information described in nix-darwin and home-manager
@@ -66,7 +41,8 @@
           { systemPackages =
             [ pkgs.vim
               pkgs.git
-              pkgs.aspellWithDicts (d: [d.en])
+              (pkgs.aspellWithDicts (d: [d.en]))
+              pkgs.jq
             ];
             variables = { EDITOR = "vim"; };
           };
@@ -125,21 +101,39 @@
             # the Home Manager release notes for a list of state version
             # changes in each release.
             # TODO: it might be worth abstracting this to the top of the file?
-            stateVersion = "23.05";
-            packages = 
-            [ pkgs.git-bug
-            ];
+            stateVersion = "24.05";
+            packages =  [ ];
           };
         
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = false;
 
+          accounts.email.accounts = 
+          { personal = 
+            { primary = true;
+              flavor = "gmail.com";
+              address = "noah.harvey247@gmail.com";
+              realName = "Noah Harvey";
+              # gpg =
+              # { signByDefault = true;
+              # };
+              # aerc = { enable = false; };
+              himalaya =
+              { enable = true; 
+              };
+            };
+          };
+
+          programs.himalaya = 
+          { enable = true; 
+            settings = { downloads-dir = "~/Downloads"; }; 
+          };
 
           programs.git =
           { enable    = true;
             userEmail = "noah.harvey247@gmail.com";
             userName  = "theNerd247";
-            aliases = 
+            aliases =
               { co   = "checkout";
                 cm   = "checkout master";
                 b    = "branch";
@@ -152,9 +146,9 @@
           }; 
 
           programs.helix =
-            { enable = true;
-              defaultEditor = true;
-            };
+          { enable = true;
+            defaultEditor = true;
+          };
 
           programs.vim =
           { enable = true;
