@@ -7,8 +7,8 @@
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "git+file:/Users/noah/src/home-manager?ref=himalaya-fix&rev=1ca694f2fcaf216309f0da1ec4efb2fbe3b68786";
-#    home-manager.url = "github:nix-community/home-manager/release-24.05";
+#    home-manager.url = "git+file:/Users/noah/src/home-manager?ref=release-24.05&rev=a1fddf0967c33754271761d91a3d921772b30d0e";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -35,6 +35,8 @@
       # see: https://daiderd.com/nix-darwin/manual/index.html#sec-options for config options
       darwinConfiguration = { config, pkgs, ... }:
         {
+          documentation.doc.enable = false;
+
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep <program-name-query>
           environment = 
@@ -121,6 +123,7 @@
               himalaya =
               { enable = true; 
               };
+              passwordCommand = "cat personalEmailPass";
             };
           };
 
@@ -194,7 +197,7 @@
     in
   
       { darwinConfigurations =
-        { "Noahs-MBP" = darwin.lib.darwinSystem 
+        { "Noahs-MacBook-Pro" = darwin.lib.darwinSystem 
           { system = "aarch64-darwin";
             modules =
             [ darwinConfiguration
