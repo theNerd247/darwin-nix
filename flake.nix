@@ -69,6 +69,8 @@
           #TODO: revisit this to have a fullsetup (ssh files, etc.)
           users.users.noah = { name = noah.name; createHome = true; home = noah.home; };
 
+          networking.hostName = "judges";
+
           #TODO: add configuration for homebrew here 
           # include installing spectacle
         
@@ -110,6 +112,22 @@
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = false;
 
+          # IRC client
+          programs.irssi =
+          { enable = true;
+            networks =
+            { liberachat = 
+              { nick = "nhar"; 
+                server = 
+                { address = "irc.libera.chat";
+                  port = 6697;
+                  autoConnect = true;
+                };
+                channels.haskell.autoJoin = true;
+              };
+            };
+          };
+
           accounts.email.accounts = 
           { personal = 
             { primary = true;
@@ -120,16 +138,22 @@
               # { signByDefault = true;
               # };
               # aerc = { enable = false; };
+              folders = 
+                { inbox = "INBOX";
+                  trash = "[Gmail]/Trash";
+                  drafts = "[Gmail]/Drafts";
+                  sent = "[Gmail]/Sent Mail";
+                };
               himalaya =
               { enable = true; 
               };
-              passwordCommand = "cat personalEmailPass";
+              passwordCommand = "security find-generic-password -a noah -s gmail -w";
             };
           };
 
           programs.himalaya = 
           { enable = true; 
-            settings = {};# { downloads-dir = "~/Downloads"; }; 
+            settings = {};
           };
 
           programs.git =
@@ -197,7 +221,7 @@
     in
   
       { darwinConfigurations =
-        { "Noahs-MacBook-Pro" = darwin.lib.darwinSystem 
+        { "judges" = darwin.lib.darwinSystem 
           { system = "aarch64-darwin";
             modules =
             [ darwinConfiguration
