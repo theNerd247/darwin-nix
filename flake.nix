@@ -2,13 +2,13 @@
   description = "Nix-Darwin configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
 #    home-manager.url = "git+file:/Users/noah/src/home-manager?ref=release-24.05&rev=a1fddf0967c33754271761d91a3d921772b30d0e";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -75,7 +75,7 @@
           # include installing spectacle
         
           nix = 
-          { package = pkgs.nixFlakes;
+          { package = pkgs.nixVersions.stable;
             extraOptions = 
               ''
               experimental-features = flakes nix-command
