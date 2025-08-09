@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
-    darwin.url = "github:lnl7/nix-darwin";
+    darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/release-25.05";
@@ -39,24 +39,14 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep <program-name-query>
           environment = 
-          { systemPackages =
-            [ pkgs.vim
-              pkgs.git
-              (pkgs.aspellWithDicts (d: [d.en]))
-              pkgs.jq
-              pkgs.nil
-            ];
+          { systemPackages = [];
             variables = { EDITOR = "hx"; };
           };
         
           # Use a custom configuration.nix location.
           # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
           # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
-        
-          # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
-          # nix.package = pkgs.nix;
-        
+       
           # Create /etc/zshrc that loads the nix-darwin environment.
           programs.zsh.enable = false;  # default shell on catalina
           programs.fish.enable = true;
@@ -67,7 +57,11 @@
 
           #NOTE: This needs to be here since nix-darwin is describing the entire system (which includes which users to setup)
           #TODO: revisit this to have a fullsetup (ssh files, etc.)
-          users.users.noah = { name = noah.name; createHome = true; home = noah.home; };
+          users.users.noah =
+          { name = noah.name;
+            createHome = true;
+            home = noah.home;
+          };
 
           networking.hostName = "judges";
 
@@ -75,7 +69,11 @@
           # include installing spectacle
         
           nix = 
-          { package = pkgs.nixVersions.stable;
+          { package = pkgs.nix;
+            # allow nix-darwin to manage the nix installation
+            # see https://nix-darwin.github.io/nix-darwin/manual/index.html#opt-nix.enable
+            # for more
+            enable = true;
             extraOptions = 
               ''
               experimental-features = flakes nix-command
@@ -105,9 +103,17 @@
             # the Home Manager release notes for a list of state version
             # changes in each release.
             # TODO: it might be worth abstracting this to the top of the file?
-            stateVersion = "24.05";
-            packages =  [ ];
+            stateVersion = "25.05";
+            packages = with pkgs;
+            [ (aspellWithDicts (d: [d.en]))
+              nil
+              nixpkgs-fmt
+            ];
+
+            sessionVariables = { EDITOR = "hx"; };
           };
+
+          programs.jq.enable = true;
         
           # Let Home Manager install and manage itself.
           programs.home-manager.enable = false;
