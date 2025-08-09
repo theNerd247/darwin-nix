@@ -41,6 +41,7 @@
           environment = 
           { systemPackages = [];
             variables = { EDITOR = "hx"; };
+            darwinConfig = "/Users/noah/.config/nix-darwin";
           };
         
           # Use a custom configuration.nix location.
@@ -48,12 +49,25 @@
           # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
        
           # Create /etc/zshrc that loads the nix-darwin environment.
-          programs.zsh.enable = false;  # default shell on catalina
+          programs.zsh = {
+            enable = true;
+            # This is used to keep zsh as the system shell but launch fish
+            # when a new terminal env is opened
+            interactiveShellInit = ''
+              if [[ $(ps -o command= -p "$PPID" | awk '{print $1}') != 'fish' ]]
+              then
+                  exec fish -l
+              fi
+            '';
+          };  # default shell on catalina
           programs.fish.enable = true;
        
           # Used for backwards compatibility, please read the changelog before changing.
           # $ darwin-rebuild changelog
-          system.stateVersion = 4;
+          system = {
+            stateVersion = 4;
+            primaryUser = "noah";
+          };
 
           #NOTE: This needs to be here since nix-darwin is describing the entire system (which includes which users to setup)
           #TODO: revisit this to have a fullsetup (ssh files, etc.)
@@ -64,6 +78,8 @@
           };
 
           networking.hostName = "judges";
+
+          home-manager.backupFileExtension = "backup";
 
           #TODO: add configuration for homebrew here 
           # include installing spectacle
@@ -107,16 +123,20 @@
             packages = with pkgs;
             [ (aspellWithDicts (d: [d.en]))
               nil
-              nixpkgs-fmt
+              nixfmt-rfc-style
             ];
 
             sessionVariables = { EDITOR = "hx"; };
           };
 
           programs.jq.enable = true;
+
+          programs.fish.enable = true;
         
           # Let Home Manager install and manage itself.
-          programs.home-manager.enable = false;
+          programs.home-manager = {
+            enable = false;
+          };
 
           # IRC client
           programs.irssi =
@@ -183,6 +203,7 @@
           programs.helix =
           { enable = true;
             defaultEditor = true;
+            extraConfig = { theme = "everforest_dark"; };
           };
 
           programs.zellij.enable = true;
