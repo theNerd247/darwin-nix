@@ -61,6 +61,10 @@
             '';
           };  # default shell on catalina
           programs.fish.enable = true;
+
+          fonts.packages = [
+            pkgs.nerd-fonts.ubuntu-mono
+          ];
        
           # Used for backwards compatibility, please read the changelog before changing.
           # $ darwin-rebuild changelog
