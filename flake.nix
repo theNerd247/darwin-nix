@@ -49,7 +49,10 @@
           # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
        
           # Create /etc/zshrc that loads the nix-darwin environment.
+          #
           programs.zsh = {
+            # NOTE: don't disable this because darwin needs the user's login shell
+            # to be zsh
             enable = true;
             # This is used to keep zsh as the system shell but launch fish
             # when a new terminal env is opened
@@ -60,7 +63,6 @@
               fi
             '';
           };  # default shell on catalina
-          programs.fish.enable = true;
 
           fonts.packages = [
             pkgs.nerd-fonts.ubuntu-mono
@@ -135,7 +137,30 @@
 
           programs.jq.enable = true;
 
-          programs.fish.enable = true;
+          programs.fish = {
+            enable = true;
+          };
+
+          programs.starship = {
+            enable = true;
+            enableFishIntegration = true;
+            enableIonIntegration = true;
+            settings = {
+
+              haskell = {
+                disabled = false;
+              };
+
+              nix_shell = {
+                disabled = false;
+                impure_msg = "[impure shell](bold red) ";
+                pure_msg = "[pure shell](bold green) ";
+                unknown_msg = "[unknown shell](bold yellow) ";
+                format = "via [☃️ $state( \($name\))](bold blue) ";
+                heuristic = true;
+              };
+            };
+          };
         
           # Let Home Manager install and manage itself.
           programs.home-manager = {
