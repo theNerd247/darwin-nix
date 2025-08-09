@@ -203,7 +203,14 @@
           programs.helix =
           { enable = true;
             defaultEditor = true;
-            extraConfig = { theme = "everforest_dark"; };
+            settings =
+              { theme = "everforest_dark";
+                editor = {
+                  true-color = true;
+                  color-modes = true;
+                  cursorline = true;
+                };
+              };
           };
 
           programs.zellij.enable = true;
