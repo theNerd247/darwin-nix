@@ -96,6 +96,11 @@
             # see https://nix-darwin.github.io/nix-darwin/manual/index.html#opt-nix.enable
             # for more
             enable = true;
+            settings = {
+              trusted-users = ["noah"];
+              trusted-substituters = ["https://cache.iog.io"];
+              trusted-public-keys = ["hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
+            };
             extraOptions = 
               ''
               experimental-features = flakes nix-command
