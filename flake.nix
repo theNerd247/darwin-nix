@@ -77,9 +77,7 @@
           '';
         };
 
-        fonts.packages = [
-          pkgs.nerd-fonts.ubuntu-mono
-        ];
+        fonts.packages = [ pkgs.nerd-fonts.ubuntu-mono ];
      
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
@@ -318,9 +316,12 @@
           };
         };
     in
-      flake-parts.lib.mkFlake { inherit inputs; } ({ config, withSystem, moduleWithSystem, ... }:
+      flake-parts.lib.mkFlake { inherit inputs; } ({ flake-parts-lib, config, withSystem, ... }:
+      let
+        inherit (flake-parts-lib) importApply;
+      in
       { imports =
-        [ # ./linuxConfiguration.nix
+        [ (importApply ./mung/flake-module.nix {})
         ]; 
 
         systems = [ "aarch64-darwin" ];
