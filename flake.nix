@@ -161,6 +161,7 @@
               nil
               nixfmt-rfc-style
               cachix
+              nix-output-monitor
             ];
 
             sessionVariables = { EDITOR = "hx"; };
