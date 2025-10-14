@@ -1,4 +1,4 @@
 {...}:
 {
-  flake.nixosConfigurations.mung = import ./configuration.nix;
+  flake.nixosModules.mung = import ./configuration.nix;
 }
