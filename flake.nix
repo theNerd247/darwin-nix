@@ -9,9 +9,11 @@
 
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = { home-manager, darwin, ... }:
+  outputs = inputs@{ home-manager, darwin, flake-parts, ... }:
     let
   
       # Configuration for `nixpkgs`
@@ -291,21 +293,25 @@
           };
         };
     in
-  
-      { darwinConfigurations =
-        { "judges" = darwin.lib.darwinSystem 
-          { system = "aarch64-darwin";
-            modules =
-            [ darwinConfiguration
-              home-manager.darwinModules.home-manager
-              { nixpkgs = nixpkgsConfig;
-                # `home-manager` config
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.noah = noahHomeConfiguration;
-              }
-            ];
-          };
+      flake-parts.lib.mkFlake { inherit inputs; } ({ config, withSystem, moduleWithSystem, ... }:
+      { imports =
+        [ # ./linuxConfiguration.nix
+        ]; 
+
+        systems = [ "aarch64-darwin" ];
+
+        flake.darwinConfigurations.judges = darwin.lib.darwinSystem 
+        { system = "aarch64-darwin";
+          modules =
+          [ darwinConfiguration
+            home-manager.darwinModules.home-manager
+            { nixpkgs = nixpkgsConfig;
+              # `home-manager` config
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.noah = noahHomeConfiguration;
+            }
+          ];
         };
-      };
+    });
 }
