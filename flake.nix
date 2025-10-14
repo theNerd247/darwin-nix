@@ -67,6 +67,16 @@
             '';
           };  # default shell on catalina
 
+          programs.ssh =
+          { # enable = true;
+            extraConfig =
+            ''
+            Host mung
+              User noah
+              HostName 192.168.1.135
+            '';
+          };
+
           fonts.packages = [
             pkgs.nerd-fonts.ubuntu-mono
           ];
@@ -87,6 +97,10 @@
           };
 
           networking.hostName = "judges";
+          # networking.hosts =
+          # { "192.168.1.135" = [ "mung" ];
+          # };
+
 
           home-manager.backupFileExtension = "backup";
 
