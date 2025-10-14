@@ -25,6 +25,7 @@
       noah = 
       { home = "/Users/noah";
         name = "noah";
+        email = "noah.harvey247@gmail.com";
       };
   
       # Main `nix-darwin` config
@@ -194,7 +195,7 @@
           { personal = 
             { primary = true;
               flavor = "gmail.com";
-              address = "noah.harvey247@gmail.com";
+              address = noah.email;
               realName = "Noah Harvey";
               # gpg =
               # { signByDefault = true;
