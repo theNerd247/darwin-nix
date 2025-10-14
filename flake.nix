@@ -115,8 +115,16 @@
             enable = true;
             settings = {
               trusted-users = ["noah"];
-              trusted-substituters = ["https://cache.iog.io"];
-              trusted-public-keys = ["hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="];
+              substituters =
+                [ "https://cache.nixos.org"
+                  "https://haskell-miso-cachix.cachix.org"
+                  "https://cache.iog.io"
+                ];
+              trusted-public-keys =
+                [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+                  "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+                  "haskell-miso-cachix.cachix.org-1:m8hN1cvFMJtYib4tj+06xkKt5ABMSGfe8W7s40x1kQ0="
+                ];
             };
             extraOptions = 
               ''
@@ -152,6 +160,7 @@
             [ (aspellWithDicts (d: [d.en]))
               nil
               nixfmt-rfc-style
+              cachix
             ];
 
             sessionVariables = { EDITOR = "hx"; };
