@@ -1,8 +1,8 @@
-{lib, config, ...}:
+{lib, config, inputs, ...}:
 {
   flake.nixosModules.mung = import ./configuration.nix;
 
-  flake.nixosConfigurations.mung = lib.nixosSystem
+  flake.nixosConfigurations.mung = inputs.nixpkgs.lib.nixosSystem
   { modules = [ config.flake.nixosModules.mung ];
   };
 
