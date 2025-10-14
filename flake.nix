@@ -316,9 +316,9 @@
           };
         };
     in
-      flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
+      flake-parts.lib.mkFlake { inherit inputs; } ({ config, ... }:
       { imports =
-        [ (import ./mung/flake-module.nix {})
+        [ (import ./mung/flake-module.nix { inherit config; lib = inputs.nixpkgs.lib; })
         ]; 
 
         systems = [ "aarch64-darwin" ];
