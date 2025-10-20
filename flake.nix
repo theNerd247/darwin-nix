@@ -75,9 +75,14 @@
           ''
           Host mung
             User noah
-            HostName 192.168.1.135
+            HostName 192.168.1.203
           '';
         };
+
+        networking.hosts =
+        { "192.168.1.203" = [ "mung" ];
+        };
+
 
         fonts.packages = [ pkgs.nerd-fonts.ubuntu-mono ];
      
@@ -97,10 +102,6 @@
         };
 
         networking.hostName = "judges";
-        # networking.hosts =
-        # { "192.168.1.135" = [ "mung" ];
-        # };
-
 
         home-manager.backupFileExtension = "backup";
 
