@@ -11,9 +11,12 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    import-tree.inputs.nixpkgs.follows = "nixpkgs";
+
   };
 
-  outputs = inputs@{ home-manager, nix-darwin, flake-parts, ... }:
+  outputs = inputs@{ home-manager, nix-darwin, flake-parts, import-tree, ... }:
     let
   
       # Configuration for `nixpkgs`
@@ -138,6 +141,7 @@
       noahHomeConfiguration = 
         { config, pkgs, ... }:
         
+        ## TODO: move this home manager config to it's own directory
         { # Home Manager needs a bit of information about you and the
           # paths it should manage.
           home = 
@@ -318,7 +322,7 @@
     in
       flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
       { imports =
-        [ ./mung/flake-module.nix
+        [ import-tree ./mung
         ]; 
 
         systems = [ "aarch64-darwin" ];
