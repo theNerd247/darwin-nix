@@ -1,6 +1,6 @@
-{pkgs, ...}:
+{withSystem, ...}:
 
-{ flake.nixosModules.mung = 
+{ flake.nixosModules.mung = withSystem "x86_64-linux" ({pkgs, ...}: 
   {
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
@@ -30,5 +30,5 @@
       '';
     };
 
-  };
+  });
 }

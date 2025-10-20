@@ -1,6 +1,6 @@
-{pkgs,...}:
+{withSystem, ...}:
 
-{ flake.nixosModules.mung =
+{ flake.nixosModules.mung = withSystem "x86_64-linux" ({pkgs, ...}: 
   {
     # this is needed so when using startx in an "ssh -X" session
     # we have permissions to run the xserver
@@ -49,5 +49,5 @@
     #...and we open the firewall to allow this port so we don't have to ssh tunnel
     # this might be a security risk
     # networking.firewall.allowedTCPPorts = [ 14500 ];
-  };
+  });
 }

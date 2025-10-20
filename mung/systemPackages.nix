@@ -1,6 +1,6 @@
-{pkgs,...}:
+{withSystem,...}:
 
-{ flake.nixosModules.mung =
+{ flake.nixosModules.mung = withSystem "x86_64-linux" ({pkgs, ...}: 
   {
     
     # Future Noah: avoid putting more packages in here and instead create a
@@ -19,5 +19,5 @@
     #  wget
     ];
 
-  };
+  });
 }
