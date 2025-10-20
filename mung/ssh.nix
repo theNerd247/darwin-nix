@@ -5,6 +5,12 @@
         settings =
         { X11Forwarding = true;
         };
+        extraConfig =
+        ''
+        Host lima
+          User noah
+          HostName 192.168.1.49
+        '';
       };
 
   };
