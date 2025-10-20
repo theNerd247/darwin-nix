@@ -321,7 +321,7 @@
     in
       flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
       { imports =
-        [ import-tree ./mung
+        [ (import-tree ./mung)
         ]; 
 
         systems = [ "aarch64-darwin" ];
