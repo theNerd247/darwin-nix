@@ -11,7 +11,8 @@
     # networking.firewall.allowedUDPPorts = [ ... ];
      
     # Or disable the firewall altogether.
-    networking.firewall.enable = true;
+    # TODO: Rename able firewall
+    networking.firewall.enable = false;
 
   };
 }
