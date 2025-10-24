@@ -1,6 +1,6 @@
 {moduleWithSystem, ...}:
 
-{ flake.nixosModules.mung = moduleWithSystem ({config, ...}: _: 
+{ flake.nixosModules.mung = moduleWithSystem ({...}: {config, ...}: 
   {
     # Configure keymap in X11
     services.xserver.xkb = {
