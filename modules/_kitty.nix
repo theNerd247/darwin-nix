@@ -19,7 +19,7 @@
   in
   {
     options.programs.kitty =
-    { enable = lib.options.mkEnableOption "enable kitty";
+    { enable = lib.options.mkEnableOption "enable kitty terminal";
 
       extraConfig = lib.options.mkOption
       { default = "";
