@@ -19,6 +19,7 @@
       { imports =
         [ (import-tree ./mung)
           (import-tree ./modules)
+          ./nixos/kitty.nix
         ]; 
 
         systems = [ "aarch64-darwin" ];

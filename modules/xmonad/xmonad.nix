@@ -1,6 +1,6 @@
 {moduleWithSystem, ...}:
 
-{ flake.nixosModules.mung = moduleWithSystem ({...}: {config, ...}: 
+{ flake.nixosModules.mung = moduleWithSystem (persystem@{config, ...}: _: 
   {
     # Configure keymap in X11
     services.xserver.xkb = {
@@ -41,7 +41,8 @@
 
         myConfig = def
           { modMask = controlMask -- For Use Super instead of Alt change to mod4Mask
-          , terminal = "${config.programs.kitty.bin}/bin/kitty-wrapped"
+          -- TODO: replace with nixos build
+          , terminal = "kitty-wrapped"
           }
           `additionalKeys`
           [ ( (controlMask,xK_r), compileRestart True)
