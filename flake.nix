@@ -79,9 +79,10 @@
           '';
         };
 
-        networking.hosts =
-        { "192.168.1.203" = [ "mung" ];
-        };
+        # not available for darwin :(
+        # networking.hosts =
+        # { "192.168.1.203" = [ "mung" ];
+        # };
 
 
         fonts.packages = [ pkgs.nerd-fonts.ubuntu-mono ];
@@ -323,6 +324,7 @@
       flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
       { imports =
         [ (import-tree ./mung)
+          (import-tree ./modules)
         ]; 
 
         systems = [ "aarch64-darwin" ];
