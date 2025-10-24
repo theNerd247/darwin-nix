@@ -16,6 +16,7 @@
           --config ${configFile}
         '';
       };
+
   in
   {
     options.programs.kitty =
@@ -26,11 +27,15 @@
         type = lib.types.lines;
         description = "Extra configuration to append to the kitty config";
       };
+
+      package = lib.options.mkOption
+      { default = kittyWithCfg;
+        type = lib.types.package;
+      };
     };
 
     config = lib.mkIf cfg.enable
     {
       environment.systemPackages = [ kittyWithCfg ];
-      programs.kitty.bin = kittyWithCfg;
     };
   }

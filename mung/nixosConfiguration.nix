@@ -7,7 +7,7 @@
   { modules =
     [ config.flake.nixosModules.mung
       ./_hardware-configuration.nix
-      ./modules/_kitty.nix
+      ../modules/_kitty.nix
     ];
   };
 
