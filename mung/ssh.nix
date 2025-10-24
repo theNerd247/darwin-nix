@@ -7,7 +7,7 @@
       };
     };
 
-    ssh.extraConfig =
+    programs.ssh.extraConfig =
     ''
     Host lima
       User noah
