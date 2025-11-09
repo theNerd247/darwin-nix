@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-  documentation.doc.enable = false;
+  documentation.doc.enable = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep <program-name-query>
@@ -58,6 +58,9 @@
   #NOTE: This needs to be here since nix-darwin is describing the entire system (which includes which users to setup)
   #TODO: revisit this to have a fullsetup (ssh files, etc.)
   users.users.noah =
+  let
+      noah = import ../users/noah.nix;
+  in
   { name = noah.name;
     createHome = true;
     home = noah.home;
