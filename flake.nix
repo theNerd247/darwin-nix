@@ -15,18 +15,8 @@
 
   };
 
-  outputs = inputs@{ home-manager, nix-darwin, flake-parts, import-tree, ... }:
-    let
-      # Main `nix-darwin` config
-      # the default location of this nix expression is in ~/.nixpkgs/darwin-configuration.nix
-      # since I'm still installing the configuration super early I don't see the need for having
-      # a separate file.
-      # use `darwin-rebuild switch --flake <file-path-to-this-file>` to build the darwin system
-      #
-      # see: https://daiderd.com/nix-darwin/manual/index.html#sec-options for config options
-      darwinConfiguration = import ./lima/darwin.nix;
-    in
-      flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
+  outputs = inputs@{ nix-darwin, flake-parts, import-tree, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
       { imports =
         [ (import-tree ./mung)
           (import-tree ./modules)
@@ -37,7 +27,8 @@
         flake.darwinConfigurations.lima = nix-darwin.lib.darwinSystem 
         { system = "aarch64-darwin";
           modules =
-          [ darwinConfiguration
+          [ ./lima/darwin.nix 
+            inputs.home-manager.darwinModules.home-manager
           ];
         };
     });

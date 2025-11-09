@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  noah = import ./users/noah.nix;
+  noah = import ../users/noah.nix;
 in
 
 ## TODO: move this home manager config to it's own directory

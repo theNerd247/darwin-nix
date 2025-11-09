@@ -1,12 +1,10 @@
-{ home-manager.darwinModules.home-manager =
-  { 
-    # Configuration for `nixpkgs`
-    # TODO: refactor
-    nixpkgsConfig.config.allowUnfree = true; 
+{ 
+  # Configuration for `nixpkgs`
+  # TODO: refactor
+  nixpkgs.config.allowUnfree = true; 
 
-    # `home-manager` config
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    home-manager.users.noah = import ../home-manager/noah.nix;
-  };
+  # `home-manager` config
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.noah = import ../home-manager/noah.nix;
 }
