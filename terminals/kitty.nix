@@ -1,9 +1,9 @@
 {
   programs.kitty =
   { enable = true;
-    themeFile = "Espresso";
+    themeFile = "gruvbox_dark";
     font =
-    { size = 14;
+    { size = 18;
       name = "DejaVu Sans";
     };
   };
