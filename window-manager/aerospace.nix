@@ -1,10 +1,14 @@
+{pkgs, ...}:
 {
   services.aerospace =
   { enable = true;
     settings =
     { after-startup-command =
-      [ "layout tiles"
+      [ # "layout tiles"
       ];
+
+      enable-normalization-flatten-containers = true;
+      enable-normalization-opposite-orientation-for-nested-containers = true;
 
       start-at-login = false;
       default-root-container-layout = "tiles";
@@ -30,13 +34,18 @@
         "${mod}-4" = "workspace 4";
         "${mod}-5" = "workspace 5";
         "${mod}-6" = "workspace 6";
+
         "${mod}-shift-1" = "move-node-to-workspace 1";
         "${mod}-shift-2" = "move-node-to-workspace 2";
         "${mod}-shift-3" = "move-node-to-workspace 3";
         "${mod}-shift-4" = "move-node-to-workspace 4";
         "${mod}-shift-5" = "move-node-to-workspace 5";
         "${mod}-shift-6" = "move-node-to-workspace 6";
+
         "${mod}-z" = "fullscreen";
+
+        "${mod}-shift-enter" = "exec-and-forget ${pkgs.kitty}/Applications/kitty.app/Contents/MacOS/kitty";
+
         #"${mod}-shift-tab" = "move-workspace-to-monitor --wrap-around next";
         # alt-shift-enter = "exec-and-forget aerospace list-windows --workspace T | grep -q "kitty" && { aerospace list-workspaces --focused | grep -q "T" && aerospace workspace-back-and-forth || aerospace workspace T; } || open -a kitty";
         # alt-shift-ctrl-q = "exec-and-forget zsh -c "cat ~/.xmonad-shortcuts | head -n 1 | tail -1 | xargs activate-chrome-tab";
