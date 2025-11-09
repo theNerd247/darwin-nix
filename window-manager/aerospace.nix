@@ -10,7 +10,7 @@
       default-root-container-layout = "tiles";
       mode.main.binding =
       let
-        mod = "cmd";
+        mod = "alt";
       in
       { # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
         "${mod}-j" = "focus down";
