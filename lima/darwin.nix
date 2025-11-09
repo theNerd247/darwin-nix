@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+
+  imports =
+  [ ../keyboard/karabiner.nix
+  ];
+  
   documentation.doc.enable = true;
 
   # List packages installed in system profile. To search by name, run:
