@@ -23,7 +23,7 @@ in
     stateVersion = "25.05";
     packages = with pkgs;
     [ (aspellWithDicts (d: [d.en]))
-      nil
+      nixd
       nixfmt-rfc-style
       cachix
       nix-output-monitor
