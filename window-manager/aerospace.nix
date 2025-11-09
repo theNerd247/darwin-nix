@@ -10,8 +10,29 @@
       enable-normalization-flatten-containers = true;
       enable-normalization-opposite-orientation-for-nested-containers = true;
 
+      accordion-padding = 10;
+
       start-at-login = false;
       default-root-container-layout = "tiles";
+
+      on-window-detected =
+      [ { "if" =
+          { app-name-regex-substring = "kitty";
+          };
+          run = ["move-node-to-workspace 2"];
+        }
+        { "if" =
+          { app-name-regex-substring = "firefox";
+          };
+          run = ["move-node-to-workspace 1"];
+        }
+        { "if" =
+          { app-name-regex-substring = "preview";
+          };
+          run = ["move-node-to-workspace 3"];
+        }
+      ];
+
       mode.main.binding =
       let
         mod = "alt";
