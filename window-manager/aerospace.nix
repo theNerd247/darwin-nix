@@ -17,11 +17,6 @@
 
       on-window-detected =
       [ { "if" =
-          { app-name-regex-substring = "kitty";
-          };
-          run = ["move-node-to-workspace 2"];
-        }
-        { "if" =
           { app-name-regex-substring = "firefox";
           };
           run = ["move-node-to-workspace 1"];
