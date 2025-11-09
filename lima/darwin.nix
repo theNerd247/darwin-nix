@@ -4,6 +4,7 @@
   imports =
   [ ../keyboard/karabiner.nix
     ../window-manager/aerospace.nix
+    ../package-managers/homebrew.nix
   ];
   
   documentation.doc.enable = true;
