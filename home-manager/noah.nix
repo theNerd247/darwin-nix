@@ -5,7 +5,12 @@ let
 in
 
 ## TODO: move this home manager config to it's own directory
-{ # Home Manager needs a bit of information about you and the
+{
+  imports =
+  [ ../terminals/kitty.nix
+  ];
+
+  # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = 
   { username = noah.name;
