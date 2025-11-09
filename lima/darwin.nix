@@ -3,6 +3,7 @@
 
   imports =
   [ ../keyboard/karabiner.nix
+    ../window-manager/aerospace.nix
   ];
   
   documentation.doc.enable = true;
