@@ -44,7 +44,7 @@
 
         systems = [ "aarch64-darwin" ];
 
-        flake.darwinConfigurations.judges = nix-darwin.lib.darwinSystem 
+        flake.darwinConfigurations.lima = nix-darwin.lib.darwinSystem 
         { system = "aarch64-darwin";
           modules =
           [ darwinConfiguration
