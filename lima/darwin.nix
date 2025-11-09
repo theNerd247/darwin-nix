@@ -5,6 +5,7 @@
   [ ../keyboard/karabiner.nix
     ../window-manager/aerospace.nix
     ../package-managers/homebrew.nix
+    ./home-manager.nix
   ];
   
   documentation.doc.enable = true;

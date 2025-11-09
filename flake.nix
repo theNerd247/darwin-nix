@@ -17,9 +17,6 @@
 
   outputs = inputs@{ home-manager, nix-darwin, flake-parts, import-tree, ... }:
     let
-        # Configuration for `nixpkgs`
-      nixpkgsConfig.config.allowUnfree = true; 
-
       # Main `nix-darwin` config
       # the default location of this nix expression is in ~/.nixpkgs/darwin-configuration.nix
       # since I'm still installing the configuration super early I don't see the need for having
@@ -28,13 +25,6 @@
       #
       # see: https://daiderd.com/nix-darwin/manual/index.html#sec-options for config options
       darwinConfiguration = import ./lima/darwin.nix;
-
-      # `home-manager` module
-      # the default location for this nix expression is `~/.config/home-manager/home.nix` but
-      # since the expression is so small I don't see the need to have it in a separate file yet
-      # see: https://nix-community.github.io/home-manager/options.html for config options
-      noahHomeConfiguration = import ./noahDarwinHome.nix;
-
     in
       flake-parts.lib.mkFlake { inherit inputs; } ({ ... }:
       { imports =
@@ -48,13 +38,6 @@
         { system = "aarch64-darwin";
           modules =
           [ darwinConfiguration
-            home-manager.darwinModules.home-manager
-            { nixpkgs = nixpkgsConfig;
-              # `home-manager` config
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.noah = noahHomeConfiguration;
-            }
           ];
         };
     });
