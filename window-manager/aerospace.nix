@@ -31,7 +31,7 @@
       mode.main.binding =
       let
         mod = "alt";
-        terminalCmd = "${pkgs.kitty}/Applications/kitty.app/Contents/MacOS/kitty -1";
+        terminalCmd = "/etc/profiles/per-user/$USER/bin/kitty -1";
       in
       { # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
         "${mod}-j" = "focus down";
