@@ -48,7 +48,7 @@
         "${mod}-shift-enter" = "exec-and-forget ${terminalCmd}";
 
         "${mod}-space" = "layout tiles accordion";
-        "${mod}-shift-space" = "layout tiles h_tiled v_tiled";
+        "${mod}-shift-space" = "layout tiles horizontal vertical";
 
         #"${mod}-shift-tab" = "move-workspace-to-monitor --wrap-around next";
         # alt-shift-enter = "exec-and-forget aerospace list-windows --workspace T | grep -q "kitty" && { aerospace list-workspaces --focused | grep -q "T" && aerospace workspace-back-and-forth || aerospace workspace T; } || open -a kitty";
