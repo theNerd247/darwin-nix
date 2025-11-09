@@ -1,10 +1,10 @@
 {
   programs.kitty =
   { enable = true;
-    themeFile = "gruvbox_dark";
+    themeFile = "GruvboxMaterialDarkSoft";
     font =
     { size = 18;
-      name = "DejaVu Sans";
+      name = "Menlo";
     };
   };
 }
