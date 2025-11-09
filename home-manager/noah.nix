@@ -8,6 +8,7 @@ in
 {
   imports =
   [ ../terminals/kitty.nix
+    ../editors/helix.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -130,19 +131,6 @@ in
       };
     extraConfig = { core = { editor = "hx"; }; };
   }; 
-
-  programs.helix =
-  { enable = true;
-    defaultEditor = true;
-    settings =
-      { theme = "everforest_dark";
-        editor = {
-          true-color = true;
-          color-modes = true;
-          cursorline = true;
-        };
-      };
-  };
 
   programs.zellij.enable = true;
 
