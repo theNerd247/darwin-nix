@@ -15,6 +15,7 @@
       mode.main.binding =
       let
         mod = "alt";
+        terminalCmd = "${pkgs.kitty}/Applications/kitty.app/Contents/MacOS/kitty -1";
       in
       { # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
         "${mod}-j" = "focus down";
@@ -44,7 +45,10 @@
 
         "${mod}-z" = "fullscreen";
 
-        "${mod}-shift-enter" = "exec-and-forget ${pkgs.kitty}/Applications/kitty.app/Contents/MacOS/kitty";
+        "${mod}-shift-enter" = "exec-and-forget ${terminalCmd}";
+
+        "${mod}-space" = "layout tiles accordion"
+        "${mod}-shift-space" = "layout tiles h_tiled v_tiled"
 
         #"${mod}-shift-tab" = "move-workspace-to-monitor --wrap-around next";
         # alt-shift-enter = "exec-and-forget aerospace list-windows --workspace T | grep -q "kitty" && { aerospace list-workspaces --focused | grep -q "T" && aerospace workspace-back-and-forth || aerospace workspace T; } || open -a kitty";
