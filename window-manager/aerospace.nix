@@ -34,15 +34,11 @@
         terminalCmd = "/etc/profiles/per-user/$USER/bin/kitty -1";
       in
       { # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
-        "${mod}-j" = "focus down";
-        "${mod}-k" = "focus up";
-        "${mod}-h" = "focus left";
-        "${mod}-l" = "focus right";
+        "${mod}-h" = "focus --boundaries-action wrap-around-the-workspace left";
+        "${mod}-j" = "focus --boundaries-action wrap-around-the-workspace down";
 
-        "${mod}-shift-j" = "move down";
-        "${mod}-shift-k" = "move up";
-        "${mod}-shift-h" = "move left";
-        "${mod}-shift-l" = "move right";
+        "${mod}-shift-h" = "workspace --wrap-around next";
+        "${mod}-shift-l" = "workspace --wrap-around prev";
         
         #"${mod}-shift-j" = "exec-and-forget aerospace list-windows --workspace focused | tail -n 1 | wc -l | xargs aerospace focus --dfs-index && aerospace move left && aerospace move left && aerospace move left";
         "${mod}-1" = "workspace 1";
