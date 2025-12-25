@@ -8,6 +8,7 @@ in
 {
   imports =
   [ ../terminals/kitty.nix
+    ../terminals/ghostty.nix
     ../editors/helix.nix
   ];
 
