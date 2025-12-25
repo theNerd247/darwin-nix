@@ -1,7 +1,7 @@
 {pkgs, ...}:
 
 {
-  environment.systemPackages =
+  home.packages =
   [ pkgs.ghostty
   ];
 }
