@@ -1,7 +1,6 @@
-{pkgs, ...}:
 {
   services.aerospace =
-  { enable = true;
+  { enable = false;
     settings =
     { after-startup-command =
       [ # "layout tiles"
