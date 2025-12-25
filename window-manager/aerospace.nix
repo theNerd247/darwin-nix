@@ -35,7 +35,7 @@
       in
       { # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
         "${mod}-h" = "focus --boundaries-action wrap-around-the-workspace left";
-        "${mod}-j" = "focus --boundaries-action wrap-around-the-workspace down";
+        "${mod}-l" = "focus --boundaries-action wrap-around-the-workspace right";
 
         "${mod}-shift-h" = "workspace --wrap-around next";
         "${mod}-shift-l" = "workspace --wrap-around prev";
