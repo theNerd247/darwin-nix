@@ -6,5 +6,5 @@
   # `home-manager` config
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.noah = import ../home-manager/noah.nix;
+  home-manager.users.noah = import ./noah.nix;
 }

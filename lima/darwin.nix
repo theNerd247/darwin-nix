@@ -5,7 +5,8 @@
   [ ../keyboard/karabiner.nix
     #../window-manager/aerospace.nix
     ../package-managers/homebrew.nix
-    ./home-manager.nix
+    # TODO: when refactoring home-manager for darwin move this to an appropriate place
+    ../home-manager/main.nix
   ];
   
   documentation.doc.enable = true;

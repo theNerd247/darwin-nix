@@ -23,6 +23,7 @@
 
         systems = [ "aarch64-darwin" ];
 
+        # TODO: make a flake module just like mung/nixosConfiguration.nix 
         flake.darwinConfigurations.lima = nix-darwin.lib.darwinSystem 
         { system = "aarch64-darwin";
           modules =

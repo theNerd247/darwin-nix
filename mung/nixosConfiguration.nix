@@ -8,6 +8,8 @@
     [ config.flake.nixosModules.mung
       ./_hardware-configuration.nix
       ../modules/_kitty.nix
+      ../home-manager/main.nix
+      inputs.home-manager.nixosModules.home-manager
     ];
   };
 
