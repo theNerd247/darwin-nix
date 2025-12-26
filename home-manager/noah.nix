@@ -15,7 +15,7 @@ in
   # paths it should manage.
   home = 
   { username = noah.name;
-    homeDirectory = noah.home;
+    homeDirectory = "/home/${noah.name}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -118,7 +118,7 @@ in
 
   programs.git =
   { enable    = true;
-    userEmail = "noah.harvey247@gmail.com";
+    userEmail = noah.email;
     userName  = "theNerd247";
     aliases =
       { co   = "checkout";

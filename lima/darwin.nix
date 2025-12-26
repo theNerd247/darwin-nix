@@ -66,13 +66,10 @@
 
   #NOTE: This needs to be here since nix-darwin is describing the entire system (which includes which users to setup)
   #TODO: revisit this to have a fullsetup (ssh files, etc.)
-  users.users.noah =
-  let
-      noah = import ../users/noah.nix;
-  in
-  { name = noah.name;
+  users.users.noah = rec
+  { inherit (import ../users/noah.nix) name;
+    home = "/Users/${name}";
     createHome = true;
-    home = noah.home;
   };
 
   networking.hostName = "lima";
