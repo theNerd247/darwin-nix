@@ -15,6 +15,15 @@
     # networking.networkmanager.enable = true;
     services.samba =
     { enable = true;
+      openFirewall = true;
+      settings = 
+      { homes =
+        { comment = "Home Dirs on Mung";
+          browseable = "no";
+          "read only" = "no";
+          "valid users" = "%S";
+        };
+      };
     };
 
     services.avahi =
