@@ -5,7 +5,7 @@
       enable = true;
       isNormalUser = true;
       description = "noah";
-      extraGroups = [ "networkmanager" "wheel" "tty" ];
+      extraGroups = [ "networkmanager" "wheel" "tty" "samba" ];
     };
   };
 }
