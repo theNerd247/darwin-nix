@@ -13,13 +13,19 @@
 
     # Enable networking
     # networking.networkmanager.enable = true;
+    services.samba =
+    { enable = true;
+    };
 
     services.avahi =
     { enable = true;
       nssmdns4 = true;
+      debug = true;
       publish =
       { enable = true;
         addresses = true;
+        domain = true;
+        userServices = true;
       };
     };
   };
